@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Chulalongkorn",
+        "hint": "The university that use pink color in academic dress"
+    },
+    {
+        "name": "Kasetsart",
+        "hint": "Agriculture"
+    },
+    {
+        "name": "Mahidol",
+        "hint": "Rama IX"
+    },
+    {
+        "name": "Khon Kaen",
+        "hint": "East"
+    },
+    {
+        "name": "Slipakorn",
+        "hint": "Art"
+    }
+]
