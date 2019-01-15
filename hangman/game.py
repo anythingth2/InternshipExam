@@ -9,6 +9,7 @@ class Game:
         self.wrongGuess = 10
         self.input = None
         self.lastInput = None
+        self.lastResult = None
         self._loadData()
 
     def _loadData(self):
@@ -26,7 +27,7 @@ class Game:
             categoryIndex = input('>  ')
 
         self.data = self.datasets[int(categoryIndex) - 1]
-        print('You select {}'.format(self.data['category']))
+        print('You selected {} category'.format(self.data['category']))
 
         self.words = self.data['words']
 
@@ -55,6 +56,8 @@ class Game:
             self.correct(index)
         else:
             self.incorrect()
+        self.lastResult = index != -1
+        
 
     def correct(self, index):
         self.answer[index] = True
@@ -63,7 +66,7 @@ class Game:
     def incorrect(self):
         self.wrongGuess -= 1
 
-    def hang(self, result=True):
+    def hang(self):
         secret = ''
         for i in range(len(self.name)):
             if self.answer[i] or not self.name[i].isalpha():
@@ -75,8 +78,8 @@ class Game:
         message = '{}\t score {}, remaining wrong guess {}'.format(
             secret, self.score, self.wrongGuess)
 
-        if not result:
-            message += 'wrong guessed: ' + self.lastInput
+        if self.lastResult != None and  not self.lastResult:
+            message += ', wrong guessed: ' + self.lastInput
 
         print(message)
 
@@ -111,7 +114,6 @@ class Game:
                 print('Your score is {}'.format(self.score))
                 exit()
             self.lastInput = self.input
-
 
 game = Game()
 game.run()
