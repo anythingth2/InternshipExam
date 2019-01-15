@@ -1,18 +1,37 @@
-from data import Data
+import datasets
+import random
+import sys
 
 
 class Game:
-
     def __init__(self):
-
-        self.setWord('United State !@', 'World')
         self.score = 0
         self.wrongGuess = 10
         self.input = None
         self.lastInput = None
+        self._loadData()
+
+    def _loadData(self):
+        self.datasets = datasets.getData()
+        print(self.datasets)
 
     def _displayMenu(self):
-        pass
+        print('Select Category:')
+        categories = [data['category'] for data in self.datasets]
+        print('\n'.join(categories))
+
+        categoryIndex = input('>')
+        while not categoryIndex.isdigit() or int(categoryIndex) not in range(1, len(categories)+1):
+            print('select category')
+            categoryIndex = input('>  ')
+
+        self.data = self.datasets[int(categoryIndex) - 1]
+        print('You select {}'.format(self.data['category']))
+
+        self.words = self.data['words']
+
+        word = self.words[random.randint(0, len(self.words))]
+        self.setWord(word['name'], word['hint'])
 
     def setWord(self, name, hint):
         self.name = name
@@ -70,6 +89,9 @@ class Game:
             return None
 
     def run(self):
+
+        self._displayMenu()
+
         print('Hint: "{}"\n'.format(self.hint))
         while True:
             self.hang()
@@ -77,7 +99,7 @@ class Game:
             if not self.input.isalpha() or len(self.input) != 1:
                 print('Please type alphabet character')
                 continue
-            
+
             self.checkHang()
             status = self.checkWinOrLose()
             if status != None:
@@ -85,11 +107,10 @@ class Game:
                     print('win')
                 else:
                     print('lose')
+                print('Answer: {}'.format(self.name))
+                print('Your score is {}'.format(self.score))
                 exit()
             self.lastInput = self.input
-
-    def start(self):
-        pass
 
 
 game = Game()
