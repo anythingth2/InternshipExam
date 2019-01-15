@@ -9,7 +9,5 @@ filePath = parser.parse_args().filePath
 fileName = os.path.splitext(filePath)[0]
 with open(filePath) as fXml:
     doc = xmltodict.parse(fXml.read())
-with open(fileName + '.json','w') as fJson:
-    
-    json.dump(doc, fJson,indent='\t')
-    # print(doc)
+with open(fileName + '.json', 'w') as fJson:
+    json.dump(doc, fJson, indent='\t')
