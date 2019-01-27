@@ -14,11 +14,11 @@ class Game:
 
     def _loadData(self):
         self.datasets = datasets.getData()
-        print(self.datasets)
 
     def _displayMenu(self):
-        print('Select Category:')
         categories = [data['category'] for data in self.datasets]
+        print('Select Category (1-{}):'.format((len(categories))))
+        
         print('\n'.join(categories))
 
         categoryIndex = input('>')
