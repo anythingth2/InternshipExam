@@ -1,6 +1,6 @@
 # InternshipExam
 Hangman game and Xml to json program.
-Theses program're implemented with Python language.
+These program're implemented with Python language.
 
 # Hangman
 
